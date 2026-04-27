@@ -3,7 +3,7 @@
 	import { AppBar } from '@skeletonlabs/skeleton-svelte';
 	import LightSwitch from '$lib/components/LightSwitch.svelte';
 	import ThemePicker from '$lib/components/ThemePicker.svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { base } from '$app/paths';
 
 	let { children } = $props();
@@ -30,7 +30,7 @@
 
 	const activeLvc = $derived(
 		lvcItems.find((item) => {
-			const path = $page.url.pathname.replace(/\/$/, '') || '/';
+			const path = page.url.pathname.replace(/\/$/, '') || '/';
 			const href = item.href.replace(/\/$/, '') || '/';
 			return path === href;
 		}) ?? lvcItems[0]
