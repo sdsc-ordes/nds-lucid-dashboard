@@ -4,23 +4,24 @@
 	import LightSwitch from '$lib/components/LightSwitch.svelte';
 	import ThemePicker from '$lib/components/ThemePicker.svelte';
 	import { page } from '$app/stores';
+	import { base } from '$app/paths';
 
 	let { children } = $props();
 
 	const lvcItems = [
 		{
-			href: '/',
+			href: `${base}/`,
 			label: 'LVC 1',
 			description:
 				'Do not use benzodiazepines or other sedativa-hypnotics in older adults as first choice for insomnia, agitation or delirium'
 		},
 		{
-			href: '/lvc-2',
+			href: `${base}/lvc-2/`,
 			label: 'LVC 2',
 			description: 'Do not transfuse more than the minimum number of red blood units necessary'
 		},
 		{
-			href: '/lvc-3',
+			href: `${base}/lvc-3/`,
 			label: 'LVC 3',
 			description:
 				'Do not order blood tests at regular intervals or routine extensive lab panels including X-rays without specific clinical questions'
@@ -28,7 +29,11 @@
 	];
 
 	const activeLvc = $derived(
-		lvcItems.find((item) => item.href === $page.url.pathname) ?? lvcItems[0]
+		lvcItems.find((item) => {
+			const path = $page.url.pathname.replace(/\/$/, '') || '/';
+			const href = item.href.replace(/\/$/, '') || '/';
+			return path === href;
+		}) ?? lvcItems[0]
 	);
 </script>
 
@@ -60,7 +65,7 @@
 				{#each lvcItems as item}
 					<a
 						href={item.href}
-						class="btn btn-sm {$page.url.pathname === item.href
+						class="btn btn-sm {activeLvc === item
 							? 'preset-filled-primary-500'
 							: 'preset-tonal-surface'}"
 					>
