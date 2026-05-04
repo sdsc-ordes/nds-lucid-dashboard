@@ -8,6 +8,12 @@
 
 	let { children } = $props();
 
+	const siteTitle = 'LUCID Dashboard';
+	const siteDescription =
+		'Hospital quality metrics and Low-Value Care (LVC) stewardship dashboards.';
+
+	const shareImage = $derived(`${page.url.origin}${base}/final-logo.jpeg`);
+
 	const lvcItems = [
 		{
 			href: `${base}/`,
@@ -37,12 +43,43 @@
 	);
 </script>
 
+<svelte:head>
+	<title>{siteTitle}</title>
+	<meta name="description" content={siteDescription} />
+	<link rel="canonical" href={page.url.href} />
+
+	<meta property="og:site_name" content={siteTitle} />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content={siteTitle} />
+	<meta property="og:description" content={siteDescription} />
+	<meta property="og:url" content={page.url.href} />
+	<meta property="og:image" content={shareImage} />
+	<meta property="og:image:type" content="image/jpeg" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={siteTitle} />
+	<meta name="twitter:description" content={siteDescription} />
+	<meta name="twitter:image" content={shareImage} />
+</svelte:head>
+
 <div class="flex flex-col h-screen overflow-hidden">
 	<!-- Top AppBar -->
 	<AppBar>
 		<AppBar.Toolbar class="grid-cols-[auto_1fr_auto]">
 			<AppBar.Lead>
-				<span class="text-xl font-bold tracking-tight">LUCID Dashboard</span>
+				<a
+					href="{base}/"
+					class="flex items-center gap-2 rounded-container preset-tonal-surface hover:preset-filled-surface-100-900 px-1 py-0.5 -ml-1 shrink-0"
+				>
+					<img
+						src="{base}/lucid_logo.svg"
+						alt=""
+						class="h-9 w-auto max-w-[min(100%,11rem)] object-contain object-left"
+						width="160"
+						height="36"
+					/>
+					<span class="sr-only">{siteTitle}</span>
+				</a>
 			</AppBar.Lead>
 			<AppBar.Headline />
 			<AppBar.Trail>
