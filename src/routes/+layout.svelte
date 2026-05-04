@@ -69,7 +69,7 @@
 			<AppBar.Lead>
 				<a
 					href="{base}/"
-					class="flex items-center gap-2 rounded-container preset-tonal-surface hover:preset-filled-surface-100-900 px-1 py-0.5 -ml-1 shrink-0"
+					class="flex items-center gap-2 py-1 -ml-1 shrink-0 min-h-10"
 				>
 					<img
 						src="{base}/lucid_logo.svg"
@@ -83,7 +83,7 @@
 			</AppBar.Lead>
 			<AppBar.Headline />
 			<AppBar.Trail>
-				<div class="flex items-center gap-3">
+				<div class="flex items-center gap-2 sm:gap-3">
 					<ThemePicker />
 					<LightSwitch />
 				</div>

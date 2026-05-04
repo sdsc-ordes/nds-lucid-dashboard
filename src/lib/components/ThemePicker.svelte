@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Menu, Portal } from '@skeletonlabs/skeleton-svelte';
+
 	const themes = [
 		{ value: 'lucid', label: 'Lucid' },
 		{ value: 'cerberus', label: 'Cerberus' },
@@ -31,7 +33,7 @@
 </script>
 
 <select
-	class="select text-sm preset-tonal-surface rounded-base px-2 py-1 cursor-pointer"
+	class="btn btn-sm preset-tonal-surface"
 	value={selected}
 	onchange={onChange}
 >

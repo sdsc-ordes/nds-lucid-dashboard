@@ -15,11 +15,11 @@
 	}
 </script>
 
-<div class="flex items-center gap-2">
-	<span class="text-xs text-surface-600-400 hidden sm:block">
+<div class="flex items-center gap-2.5 min-h-10 py-1">
+	<span class="text-xs text-surface-600-400 hidden sm:block shrink-0">
 		{checked ? 'Dark' : 'Light'}
 	</span>
-	<Switch {checked} {onCheckedChange}>
+	<Switch class="shrink-0" {checked} {onCheckedChange}>
 		<Switch.Control>
 			<Switch.Thumb />
 		</Switch.Control>
