@@ -1,13 +1,15 @@
 <!doctype html>
-<html lang="en" data-theme="cerberus" data-mode="light">
+<html lang="en" data-theme="lucid" data-mode="light">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- Restore persisted theme/mode before first paint to prevent flash -->
 		<script>
 			const mode = localStorage.getItem('mode') || 'light';
-			const theme = localStorage.getItem('theme') || 'cerberus';
+			const allowed = new Set(['lucid', 'cerberus', 'wintry']);
+			let theme = localStorage.getItem('theme') || 'lucid';
+			if (!allowed.has(theme)) theme = 'lucid';
 			document.documentElement.setAttribute('data-mode', mode);
 			document.documentElement.setAttribute('data-theme', theme);
 		</script>

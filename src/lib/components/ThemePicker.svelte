@@ -1,24 +1,29 @@
 <script lang="ts">
 	const themes = [
+		{ value: 'lucid', label: 'Lucid' },
 		{ value: 'cerberus', label: 'Cerberus' },
-		{ value: 'wintry', label: 'Wintry' },
-		{ value: 'modern', label: 'Modern' },
-		{ value: 'seafoam', label: 'Seafoam' },
-		{ value: 'rose', label: 'Rose' },
-		{ value: 'sahara', label: 'Sahara' },
-		{ value: 'mint', label: 'Mint' },
-		{ value: 'rocket', label: 'Rocket' },
-		{ value: 'lucid', label: 'Lucid' }
-	];
+		{ value: 'wintry', label: 'Wintry' }
+	] as const;
 
-	let selected = $state('cerberus');
+	type ThemeId = (typeof themes)[number]['value'];
+	const themeValues = new Set<string>(themes.map((t) => t.value));
+
+	function resolveStoredTheme(): ThemeId {
+		const raw = localStorage.getItem('theme');
+		if (raw && themeValues.has(raw)) return raw as ThemeId;
+		return 'lucid';
+	}
+
+	let selected = $state<ThemeId>('lucid');
 
 	$effect(() => {
-		selected = localStorage.getItem('theme') ?? 'cerberus';
+		const t = resolveStoredTheme();
+		if (localStorage.getItem('theme') !== t) localStorage.setItem('theme', t);
+		selected = t;
 	});
 
 	function onChange(event: Event) {
-		const value = (event.target as HTMLSelectElement).value;
+		const value = (event.target as HTMLSelectElement).value as ThemeId;
 		document.documentElement.setAttribute('data-theme', value);
 		localStorage.setItem('theme', value);
 		selected = value;
